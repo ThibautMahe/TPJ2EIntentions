@@ -20,9 +20,10 @@ public class CriminelAccess {
 		ArrayList<CriminelEntite> list = new ArrayList<CriminelEntite>();
 
 		try (Statement stmt = conn.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("SELECT * FROM intentions")) {
+			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Criminels")) {
 				while (rs.next()) {
-					CriminelEntite temp = new CriminelEntite(rs.getString("description"));
+					System.out.format("Select criminel %s",rs.getString("Name"));
+					CriminelEntite temp = new CriminelEntite(rs.getString("Name"));
 					list.add(temp);
 				}
 

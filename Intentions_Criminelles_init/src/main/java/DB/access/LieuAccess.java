@@ -20,9 +20,9 @@ public class LieuAccess {
 		ArrayList<LieuEntite> list = new ArrayList<LieuEntite>();
 
 		try (Statement stmt = conn.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("SELECT * FROM intentions")) {
+			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Lieux")) {
 				while (rs.next()) {
-					LieuEntite temp = new LieuEntite(rs.getString("description"));
+					LieuEntite temp = new LieuEntite(rs.getString("Name"));
 					list.add(temp);
 				}
 

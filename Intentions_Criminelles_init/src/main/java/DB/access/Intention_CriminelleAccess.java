@@ -19,7 +19,7 @@ public class Intention_CriminelleAccess {
 		ArrayList<Intention_CriminelleEntite> list = new ArrayList<Intention_CriminelleEntite>();
 
 		try (Statement stmt = conn.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("SELECT * FROM intentions")) {
+			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Intentions")) {
 				while (rs.next()) {
 					Intention_CriminelleEntite temp = new Intention_CriminelleEntite();
 					list.add(temp);

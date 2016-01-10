@@ -14,15 +14,15 @@ public class Populator {
 			try (Statement stm = conn.createStatement()) {
 				stm.execute("DROP TABLE IF EXISTS Intentions");
 				stm.execute(
-						"CREATE TABLE Intentions(id IntentionID PRIMARY KEY AUTO_INCREMENT, int CriminelID, int LieuID, int Action_CriminelleID)");
-				stm.execute("DROP TABLE IF EXIST Actions_criminelles");
+						"CREATE TABLE Intentions(IntentionID BIGINT PRIMARY KEY AUTO_INCREMENT, CriminelID BIGINT, LieuID BIGINT, Action_CriminelleID BIGINT)");
+				stm.execute("DROP TABLE IF EXISTS Actions_criminelles");
 				stm.execute(
-						"CREATE TABLE Actions_criminelles(int Action_CriminelleID PRIMARY KEY AUTO_INCREMENT, Action_criminelle VARCHAR(255)) ");
-				stm.execute("DROP TABLE IF EXIST Criminelles");
+						"CREATE TABLE Actions_criminelles(Action_CriminelleID BIGINT PRIMARY KEY AUTO_INCREMENT, Action_criminelle VARCHAR(255)) ");
+				stm.execute("DROP TABLE IF EXISTS Criminels");
 				stm.execute(
-						"CREATE TABLE Criminelles(int CriminelleID PRIMARY KEY AUTO_INCREMENT, Nom VARCHAR(255), int Age) ");
-				stm.execute("DROP TABLE IF EXIST Lieu");
-				stm.execute("CREATE TABLE Criminelles(int LieuID PRIMARY KEY AUTO_INCREMENT, Nom VARCHAR(255)) ");
+						"CREATE TABLE Criminels(CriminelID BIGINT PRIMARY KEY AUTO_INCREMENT, Nom VARCHAR(255), Age BIGINT) ");
+				stm.execute("DROP TABLE IF EXISTS Lieux");
+				stm.execute("CREATE TABLE Lieux(LieuID BIGINT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(255)) ");
 
 			}
 		} catch (SQLException e) {
@@ -33,7 +33,8 @@ public class Populator {
 	public static void populateSchema() {
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
 			try (Statement stm = conn.createStatement()) {
-				stm.executeUpdate("INSERT INTO Intentions(description) VALUES('Essai description')");
+				stm.executeUpdate("INSERT INTO Lieux(Name) VALUES('Jean')");
+				stm.executeUpdate("INSERT INTO Lieux(Name) VALUES('Jacque')");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
