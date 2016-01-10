@@ -1,4 +1,4 @@
-package lancher.lab;
+package launcher.lab;
 
 import java.io.File;
 

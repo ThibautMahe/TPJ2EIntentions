@@ -1,4 +1,4 @@
-package lancher.lab;
+package launcher.lab;
 
 import org.apache.catalina.*;
 import org.apache.catalina.core.StandardContext;
@@ -7,6 +7,7 @@ import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
 import org.apache.tomcat.JarScanFilter;
 import org.apache.tomcat.JarScanType;
+import org.apache.tomcat.util.scan.StandardJarScanFilter;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -91,7 +92,6 @@ public class Launcher {
         for (Container container : service.getContainer().findChildren()) {
           for (Container c : container.findChildren()) {
             ((Context) c).getJarScanner().setJarScanFilter(new JarScanFilter() {
-              @Override
               public boolean check(JarScanType jarScanType, String jarName) {
                 for (Pattern each : allowedPatterns) {
                   if (each.matcher(jarName).matches()) {
