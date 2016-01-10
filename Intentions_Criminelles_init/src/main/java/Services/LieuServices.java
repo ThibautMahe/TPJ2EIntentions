@@ -16,7 +16,7 @@ public class LieuServices {
 		this.lieuAccess = new LieuAccess();
 	}
 
-	public ArrayList<LieuEntite> getAllIntentions() {
+	public ArrayList<LieuEntite> getAllLieux() {
 		ArrayList<LieuEntite> allIntentions = null;
 
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {

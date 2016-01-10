@@ -16,7 +16,7 @@ public class Intention_CriminelleServices {
 		this.intention_CriminelleAccess = new Intention_CriminelleAccess();
 	}
 
-	public ArrayList<Intention_CriminelleEntite> getAllIntentions() {
+	public ArrayList<Intention_CriminelleEntite> getAllIntentions_Criminelles() {
 		ArrayList<Intention_CriminelleEntite> allIntentions = null;
 
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {

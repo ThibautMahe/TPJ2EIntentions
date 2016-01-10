@@ -15,17 +15,28 @@ public class CriminelServices {
 	public CriminelServices() {
 		this.criminelleAccess = new CriminelAccess();
 	}
+	
+	public void setCriminel(CriminelEntite Criminel){
+		
+		
+		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
+			criminelleAccess.setCriminel(Criminel,conn);
 
-	public ArrayList<CriminelEntite> getAllIntentions() {
-		ArrayList<CriminelEntite> allIntentions = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<CriminelEntite> getAllCriminels() {
+		ArrayList<CriminelEntite> allCriminels = null;
 
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
-			allIntentions = criminelleAccess.selectAll(conn);
+			allCriminels = criminelleAccess.selectAllCriminels(conn);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return allIntentions;
+		return allCriminels;
 	}
 }
