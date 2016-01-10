@@ -10,4 +10,11 @@ Nom - prenom
 
 
 Regle metier :
+ex : certaine action ne peuvent etre faite que dans certain lieu géographique
 
+Etape : (garder a l'esprit les 5 couches)
+-Afficher 1 nom depuis la base de donnee
+-Ajouter un nom dans la base
+-ajouter un lieu et une action
+-associer le nom le lieu et l'action
+-associer le nom le lieu et l'action en fonction de la regle métier
