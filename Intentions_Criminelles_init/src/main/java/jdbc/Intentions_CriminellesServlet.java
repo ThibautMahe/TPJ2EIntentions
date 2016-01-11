@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import DB.Entite.CriminelEntite;
 import Services.CriminelServices;
 
-@WebServlet(name = "Intentions_Criminelles", urlPatterns = { "/Intentions_Criminelles" })
+@WebServlet(urlPatterns = { "/Intentions_Criminelles" })
 public class Intentions_CriminellesServlet extends HttpServlet {
 
 	@Override

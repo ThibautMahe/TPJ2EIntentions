@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import DB.Entite.CriminelEntite;
 import Services.CriminelServices;
 
-@WebServlet(name = "Criminelles", urlPatterns = { "/Intentions_Criminelles/Criminels" })
+@WebServlet(urlPatterns = { "/Intentions_Criminelles/Criminels" })
 public class CriminelsServlet  extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
