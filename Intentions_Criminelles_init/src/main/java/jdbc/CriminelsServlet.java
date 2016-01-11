@@ -1,7 +1,6 @@
 package jdbc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import DB.Entite.CriminelEntite;
 import Services.CriminelServices;
 
-@WebServlet(name = "Intentions_Criminelles", urlPatterns = { "/Intentions_Criminelles" })
-public class Intentions_CriminellesServlet extends HttpServlet {
-
+@WebServlet(name = "Criminelles", urlPatterns = { "/Intentions_Criminelles/Criminels" })
+public class CriminelsServlet  extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/Intentions_CriminellesGet.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/CriminellesGet.jsp");
 		rd.forward(request, response);
 	}
 
@@ -32,8 +30,7 @@ public class Intentions_CriminellesServlet extends HttpServlet {
 		
 		request.setAttribute("Criminels", service.getAllCriminels());
 
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/Intentions_CriminellesPost.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/CriminellesPost.jsp");
 		rd.forward(request, response);
 	}
-
 }

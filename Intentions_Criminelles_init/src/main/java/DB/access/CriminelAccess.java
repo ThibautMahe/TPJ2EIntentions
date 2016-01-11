@@ -15,11 +15,11 @@ public class CriminelAccess {
 
 	}
 
-	public void setCriminel(CriminelEntite Criminel, Connection conn) {
+	public void setCriminel(CriminelEntite criminel, Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
 			try {
-				stmt.executeUpdate("INSERT INTO Criminels(Name,Age) values('" + Criminel.getName() + "',"
-						+ Criminel.getAge() + ")");
+				stmt.executeUpdate("INSERT INTO Criminels(Name,Age) values('" + criminel.getName() + "',"
+						+ criminel.getAge() + ")");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -28,7 +28,9 @@ public class CriminelAccess {
 		}
 	}
 	
-	public void getCriminel(CriminelEntite Criminel, Connection conn){
+	public CriminelEntite getCriminel( Connection conn){
+		CriminelEntite criminel = new CriminelEntite();
+		
 		try (Statement stmt = conn.createStatement()) {
 			try {
 				stmt.executeQuery("SELECT * FROM Criminels");
@@ -38,6 +40,7 @@ public class CriminelAccess {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+		return criminel;
 	}
 
 	public ArrayList<CriminelEntite> selectAllCriminels(Connection conn) throws SQLException {

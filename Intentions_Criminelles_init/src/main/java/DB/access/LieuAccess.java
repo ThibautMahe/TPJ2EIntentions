@@ -7,12 +7,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import DB.Entite.CriminelEntite;
 import DB.Entite.LieuEntite;
 
 public class LieuAccess {
 
 	public LieuAccess() {
 
+	}
+
+	public void setLieu(LieuEntite Lieu, Connection conn) {
+		try (Statement stmt = conn.createStatement()) {
+			try {
+				stmt.executeUpdate("INSERT INTO Lieux(Name) values('" + Lieu.getEmplacement() + "')");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	public ArrayList<LieuEntite> selectAll(Connection conn) throws SQLException {

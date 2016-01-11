@@ -8,11 +8,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DB.Entite.Action_CriminelleEntite;
+import DB.Entite.CriminelEntite;
 
 public class Action_CriminelleAccess {
 
 	public Action_CriminelleAccess() {
 
+	}
+	
+	public void setActionCriminel(Action_CriminelleEntite action_Criminelle, Connection conn) {
+		try (Statement stmt = conn.createStatement()) {
+			try {
+				stmt.executeUpdate("INSERT INTO Criminels(Action_Criminel) values('" + action_Criminelle.getAction() + "')");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public Action_CriminelleEntite getAction_Criminelle( Connection conn){
+		Action_CriminelleEntite action_Criminelle = new Action_CriminelleEntite();
+		
+		try (Statement stmt = conn.createStatement()) {
+			try {
+				stmt.executeQuery("SELECT * FROM Criminels");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return action_Criminelle;
 	}
 
 	public ArrayList<Action_CriminelleEntite> selectAll(Connection conn) throws SQLException {
@@ -30,5 +58,4 @@ public class Action_CriminelleAccess {
 		}
 		return list;
 	}
-
 }
