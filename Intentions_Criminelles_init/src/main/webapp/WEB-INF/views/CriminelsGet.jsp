@@ -5,21 +5,23 @@
 <title>Liste des criminels</title>
 </head>
 <body>
+	<a href="/Intentions_Criminelles"> <input type="button"
+		value="Retour"></a>
 	<h1>Liste des criminels</h1>
 	<div>
 		<form method='post'>
 			<table>
 				<c:forEach var="criminel" items="${Criminels}">
-				<tr>
-					<td>${criminel.name}</td>
-					<td>: ${criminel.age}</td>
-					<td>ans</td>
-					<td>&nbsp;</td>
-					<td><input name="Modifier${criminel.ID}" type="submit"
-						value="Modifier"></td>
-					<td><input name="Supprimer${criminel.ID}" type="submit"
-						value="Supprimer"></td>
-				</tr>
+					<tr>
+						<td>${criminel.name}</td>
+						<td>: ${criminel.age}</td>
+						<td>ans</td>
+						<td>&nbsp;</td>
+						<td><input name="Modifier${criminel.ID}" type="submit"
+							value="Modifier"></td>
+						<td><input name="Supprimer${criminel.ID}" type="submit"
+							value="Supprimer"></td>
+					</tr>
 				</c:forEach>
 				<tr>
 					<td>&nbsp;</td>

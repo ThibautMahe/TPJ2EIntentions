@@ -33,6 +33,8 @@ public class Populator {
 			try (Statement stm = conn.createStatement()) {
 				stm.executeUpdate("INSERT INTO CRIMINELS(Name,Age) VALUES('Jean',6)");
 				stm.executeUpdate("INSERT INTO Criminels(Name,Age) VALUES('Jacque',58)");
+				stm.executeUpdate("INSERT INTO Actions_criminelles(action_criminelle) VALUES('Ne pas faire la vaisselle')");
+				stm.executeUpdate("INSERT INTO Lieux(Name) VALUES('Cuisine')");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

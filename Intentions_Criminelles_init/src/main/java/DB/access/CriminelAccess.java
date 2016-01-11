@@ -63,7 +63,8 @@ public class CriminelAccess {
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT MAX(CriminelID) as nbCriminel FROM Criminels")) {
 				rs.next();
-				nbcriminel = Integer.parseInt(rs.getString("NBCRIMINEL"));
+				if (rs.getString("NBCRIMINEL") != null)
+					nbcriminel = Integer.parseInt(rs.getString("NBCRIMINEL"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

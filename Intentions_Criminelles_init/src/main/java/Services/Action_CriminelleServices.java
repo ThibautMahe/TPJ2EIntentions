@@ -16,11 +16,10 @@ public class Action_CriminelleServices {
 	public Action_CriminelleServices() {
 		this.action_CriminelleAccess = new Action_CriminelleAccess();
 	}
-	
+
 	public void createAction_Criminelle(Action_CriminelleEntite action_Criminelle) {
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
 			action_CriminelleAccess.createAction_Criminelle(action_Criminelle, conn);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -28,18 +27,17 @@ public class Action_CriminelleServices {
 
 	public void setAction_Criminelle(Action_CriminelleEntite action_Criminelle) {
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
-			action_CriminelleAccess.setActionCriminel(action_Criminelle, conn);
+			action_CriminelleAccess.setAction_Criminelle(action_Criminelle, conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Action_CriminelleEntite getAction_Criminelle(int Action_CriminelleID) {
 		Action_CriminelleEntite action_Criminelle = null;
 
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
 			action_Criminelle = action_CriminelleAccess.getAction_Criminelle(Action_CriminelleID, conn);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -51,7 +49,6 @@ public class Action_CriminelleServices {
 
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
 			nbAction_Criminelle = action_CriminelleAccess.getnbAction_Criminelle(conn);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

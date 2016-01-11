@@ -17,22 +17,8 @@ public class Action_CriminelleAccess {
 	public void createAction_Criminelle(Action_CriminelleEntite action_Criminelle, Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
 			try {
-				stmt.executeUpdate("INSERT INTO Actions_criminelles(Action_Criminel) values('"
+				stmt.executeUpdate("INSERT INTO Actions_criminelles(Action_Criminelle) values('"
 						+ action_Criminelle.getAction() + "')");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	public void setActionCriminel(Action_CriminelleEntite action_Criminelle, Connection conn) {
-		try (Statement stmt = conn.createStatement()) {
-			try {
-				stmt.executeUpdate("UPDATE Criminels SET Name='" + action_Criminelle.getAction() + " WHERE CriminelID="
-						+ action_Criminelle.getID());
-
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -45,7 +31,7 @@ public class Action_CriminelleAccess {
 		try (Statement stmt = conn.createStatement()) {
 			try {
 				stmt.executeUpdate(
-						"UPDATE Actions_criminelles SET Action_criminelle='" + action_Criminelle.getAction() + "'");
+						"UPDATE Actions_criminelles SET Action_criminelle='" + action_Criminelle.getAction() + "' WHERE Action_criminelleID=" + action_Criminelle.getID());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -79,7 +65,8 @@ public class Action_CriminelleAccess {
 			try (ResultSet rs = stmt
 					.executeQuery("SELECT MAX(Action_criminelleID) as nbAction_Criminelle FROM Actions_criminelles")) {
 				rs.next();
-				nbAction_Criminelle = Integer.parseInt(rs.getString("nbAction_Criminelle"));
+				if (rs.getString("nbAction_Criminelle") != null)
+					nbAction_Criminelle = Integer.parseInt(rs.getString("nbAction_Criminelle"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -103,13 +90,12 @@ public class Action_CriminelleAccess {
 	}
 
 	public ArrayList<Action_CriminelleEntite> getAllActions_Criminelles(Connection conn) throws SQLException {
-
 		ArrayList<Action_CriminelleEntite> list = new ArrayList<Action_CriminelleEntite>();
 
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Actions_criminelles")) {
 				while (rs.next()) {
-					Action_CriminelleEntite temp = new Action_CriminelleEntite(rs.getString("Action_criminelle"));
+					Action_CriminelleEntite temp = new Action_CriminelleEntite(Integer.parseInt(rs.getString("Action_criminelleID")),rs.getString("Action_criminelle"));
 					list.add(temp);
 				}
 

@@ -10,11 +10,11 @@
 		<table>
 			<tr>
 				<td>Action:</td>
-				<td><input Name='Action' value="${Actions.action}" /></td>
+				<td><input Name='Action' value="${Actions_Criminelles.action}" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<input type="hidden" Name='id'
-					value="${Actions.ID}" /></td>
+					value="${Actions_Criminelles.ID}" /></td>
 				<td><input type='reset' /><input name="submit" type='submit' value='Ok' /></td>
 			</tr>
 		</table>

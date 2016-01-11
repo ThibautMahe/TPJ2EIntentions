@@ -10,7 +10,7 @@
 		<table>
 			<tr>
 				<td>Emplacement:</td>
-				<td><input Name='Name' value="${Lieux.emplacement}" /></td>
+				<td><input Name='emplacement' value="${Lieux.emplacement}" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<input type="hidden" Name='id'

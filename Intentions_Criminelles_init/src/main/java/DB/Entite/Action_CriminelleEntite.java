@@ -4,8 +4,6 @@ public class Action_CriminelleEntite {
 	private int ID;
 	private String action;
 
-
-
 	public Action_CriminelleEntite() {
 		this.action = "";
 	}

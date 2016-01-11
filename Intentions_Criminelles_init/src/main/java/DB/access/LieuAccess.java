@@ -17,7 +17,7 @@ public class LieuAccess {
 	public void createLieu(LieuEntite lieu, Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
 			try {
-				stmt.executeUpdate("INSERT INTO Lieux(Name,Age) VALUES ('" + lieu.getEmplacement() + "')");
+				stmt.executeUpdate("INSERT INTO Lieux(Name) VALUES ('" + lieu.getEmplacement() + "')");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -29,7 +29,7 @@ public class LieuAccess {
 	public void setLieu(LieuEntite lieu, Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
 			try {
-				stmt.executeUpdate("UPDATE Lieux SET Name='" + lieu.getEmplacement() + "'");
+				stmt.executeUpdate("UPDATE Lieux SET Name='" + lieu.getEmplacement() + "' WHERE LieuID=" + lieu.getID());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -53,14 +53,15 @@ public class LieuAccess {
 		}
 		return lieu;
 	}
-	
+
 	public int getnbLieu(Connection conn) {
 		int nbLieu = 0;
 
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT MAX(LieuID) as NBLieu FROM Lieux")) {
 				rs.next();
-				nbLieu = Integer.parseInt(rs.getString("NBLieu"));
+				if (rs.getString("NBLieu") != null)
+					nbLieu = Integer.parseInt(rs.getString("NBLieu"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -89,7 +90,7 @@ public class LieuAccess {
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Lieux")) {
 				while (rs.next()) {
-					LieuEntite temp = new LieuEntite(rs.getString("Name"));
+					LieuEntite temp = new LieuEntite(Integer.parseInt(rs.getString("LieuID")),rs.getString("Name"));
 					list.add(temp);
 				}
 
