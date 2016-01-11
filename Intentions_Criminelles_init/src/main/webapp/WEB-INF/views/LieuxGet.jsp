@@ -11,8 +11,6 @@
 			<c:forEach var="lieu" items="${Lieux}">
 				<tr>
 					<td>${lieu.name}</td>
-					<td>: ${lieu.age}</td>
-					<td>ans</td>
 					<td>&nbsp;&nbsp;</td>
 					<td><input type="button" value="Modifier"></td>
 					<td><input type="button" value="Supprimer"></td>
@@ -20,7 +18,8 @@
 			</c:forEach>
 			<tr>
 				<td>&nbsp;</td>
-				<td><input type="button" value="Ajouter lieu"></td>
+				<td><input name="Ajouter lieu" type="submit"
+					value="Ajouter lieu"></td>
 			</tr>
 		</table>
 	</div>

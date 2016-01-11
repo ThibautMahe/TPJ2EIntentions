@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import DB.access.Constants;
 import DB.access.Action_CriminelleAccess;
 import DB.Entite.Action_CriminelleEntite;
-import DB.Entite.CriminelEntite;
 
 public class Action_CriminelleServices {
 
@@ -16,6 +15,15 @@ public class Action_CriminelleServices {
 
 	public Action_CriminelleServices() {
 		this.action_CriminelleAccess = new Action_CriminelleAccess();
+	}
+	
+	public void createAction_Criminelle(Action_CriminelleEntite action_Criminelle) {
+		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
+			action_CriminelleAccess.createAction_Criminelle(action_Criminelle, conn);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setAction_Criminelle(Action_CriminelleEntite action_Criminelle) {
@@ -25,22 +33,45 @@ public class Action_CriminelleServices {
 			e.printStackTrace();
 		}
 	}
-
-	public Action_CriminelleEntite getAction_Criminelle() {
+	
+	public Action_CriminelleEntite getAction_Criminelle(int Action_CriminelleID) {
 		Action_CriminelleEntite action_Criminelle = null;
+
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
-			action_Criminelle = action_CriminelleAccess.getAction_Criminelle(conn);
+			action_Criminelle = action_CriminelleAccess.getAction_Criminelle(Action_CriminelleID, conn);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return action_Criminelle;
 	}
 
+	public int getnbAction_Criminelle() {
+		int nbAction_Criminelle = 0;
+
+		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
+			nbAction_Criminelle = action_CriminelleAccess.getnbAction_Criminelle(conn);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nbAction_Criminelle;
+	}
+
+	public void DeleteAction_Criminelle(Action_CriminelleEntite action_Criminelle) {
+		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
+			action_CriminelleAccess.DeleteAction_Criminelle(action_Criminelle, conn);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public ArrayList<Action_CriminelleEntite> getAllActions_Criminelles() {
 		ArrayList<Action_CriminelleEntite> allIntentions = null;
 
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
-			allIntentions = action_CriminelleAccess.selectAll(conn);
+			allIntentions = action_CriminelleAccess.getAllActions_Criminelles(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

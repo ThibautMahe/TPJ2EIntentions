@@ -1,7 +1,6 @@
 package jdbc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +16,19 @@ import Services.LieuServices;
 public class LieuxServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/LieuxGet.jsp");
+		LieuServices service = new LieuServices();
+		if (request.getParameter("submit") != null && Integer.parseInt(request.getParameter("id")) != 0) {
+			LieuEntite lieu = new LieuEntite(Integer.parseInt(request.getParameter("id")),
+					request.getParameter("Name"));
+			service.setLieu(lieu);
+		} else if (request.getParameter("submit") != null && Integer.parseInt(request.getParameter("id")) == 0) {
+			LieuEntite lieu = new LieuEntite(Integer.parseInt(request.getParameter("id")),
+					request.getParameter("Name"));
+			service.createLieu(lieu);
+		}
+
+		request.setAttribute("Criminels", service.getAllLieux());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/CriminelsGet.jsp");
 		rd.forward(request, response);
 	}
 
@@ -25,13 +36,24 @@ public class LieuxServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LieuServices service = new LieuServices();
 
-		LieuEntite Lieu = new LieuEntite(request.getParameter("Lieu"));
-				
-		service.setLieu(Lieu);
-
-		request.setAttribute("Lieu", service.getAllLieux());
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/LieuxPost.jsp");
-		rd.forward(request, response);
+		for (int i = 1; i < service.getnbLieu() + 1; i++) {
+			if (request.getParameter("Modifier" + i) != null) {
+				request.setAttribute("Criminels", service.getLieu(i));
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/CriminelsPost.jsp");
+				rd.forward(request, response);
+			} else if (request.getParameter("Supprimer" + i) != null) {
+				LieuEntite lieu = new LieuEntite(i);
+				service.DeleteLieu(lieu);
+				request.setAttribute("Criminels", service.getAllLieux());
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/CriminelsGet.jsp");
+				rd.forward(request, response);
+			}
+		}
+		if (request.getParameter("Ajouter criminel") != null) {
+			LieuEntite lieu = new LieuEntite(0, "");
+			request.setAttribute("Lieux", lieu);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/CriminelsPost.jsp");
+			rd.forward(request, response);
+		}
 	}
 }

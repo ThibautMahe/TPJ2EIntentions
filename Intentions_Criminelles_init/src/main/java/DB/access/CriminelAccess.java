@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import DB.Entite.CriminelEntite;
 
@@ -32,7 +31,7 @@ public class CriminelAccess {
 		try (Statement stmt = conn.createStatement()) {
 			try {
 				stmt.executeUpdate("UPDATE Criminels SET Name='" + criminel.getName() + "',Age=" + criminel.getAge()
-						+ " WHERE Criminels.CriminelID=" + criminel.getID() + ")");
+						+ " WHERE CriminelID=" + criminel.getID());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -45,7 +44,8 @@ public class CriminelAccess {
 		CriminelEntite criminel = null;
 
 		try (Statement stmt = conn.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Criminels WHERE CriminelID=" + criminelID + ")")) {
+			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Criminels WHERE CriminelID=" + criminelID)) {
+				rs.next();
 				criminel = new CriminelEntite(Integer.parseInt(rs.getString("CriminelID")), rs.getString("Name"),
 						Integer.parseInt(rs.getString("Age")));
 			} catch (SQLException e) {

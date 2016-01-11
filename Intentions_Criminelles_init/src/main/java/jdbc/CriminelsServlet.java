@@ -17,15 +17,11 @@ public class CriminelsServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CriminelServices service = new CriminelServices();
-		if (request.getParameter("submit") != null)
-			System.out.println("hello ");
 		if (request.getParameter("submit") != null && Integer.parseInt(request.getParameter("id")) != 0) {
-			System.out.println("hello modif");
 			CriminelEntite criminel = new CriminelEntite(Integer.parseInt(request.getParameter("id")),
 					request.getParameter("Name"), Integer.parseInt(request.getParameter("Age")));
 			service.setCriminel(criminel);
 		} else if (request.getParameter("submit") != null && Integer.parseInt(request.getParameter("id")) == 0) {
-			System.out.println("hello modif");
 			CriminelEntite criminel = new CriminelEntite(Integer.parseInt(request.getParameter("id")),
 					request.getParameter("Name"), Integer.parseInt(request.getParameter("Age")));
 			service.createCriminel(criminel);
@@ -48,6 +44,7 @@ public class CriminelsServlet extends HttpServlet {
 			} else if (request.getParameter("Supprimer" + i) != null) {
 				CriminelEntite criminel = new CriminelEntite(i);
 				service.DeleteCriminel(criminel);
+				request.setAttribute("Criminels", service.getAllCriminels());
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/CriminelsGet.jsp");
 				rd.forward(request, response);
 			}

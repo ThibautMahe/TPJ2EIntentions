@@ -2,14 +2,22 @@
 
 <html>
 <head>
-<title>Liste des lieux</title>
+<title>Lieux</title>
 </head>
 <body>
-	<div>
-		<c:forEach var="Lieux" items="${Lieux}">
-			<ul>
-				<li>${lieux.name}</li>
-			</ul>
-		</c:forEach>
-	</div>
+	<h1>Lieux</h1>
+	<form method='get'>
+		<table>
+			<tr>
+				<td>Emplacement:</td>
+				<td><input Name='Name' value="${Lieux.emplacement}" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;<input type="hidden" Name='id'
+					value="${Lieux.ID}" /></td>
+				<td><input type='reset' /><input name="submit" type='submit' value='Ok' /></td>
+			</tr>
+		</table>
+	</form>
 </body>
+</html>

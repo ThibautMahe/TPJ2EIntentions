@@ -2,14 +2,22 @@
 
 <html>
 <head>
-<title>Liste des actions criminelles</title>
+<title>Action</title>
 </head>
 <body>
-	<div>
-		<c:forEach var="action" items="${Action}">
-			<ul>
-				<li>${action.name}</li>
-			</ul>
-		</c:forEach>
-	</div>
+	<h1>Action</h1>
+	<form method='get'>
+		<table>
+			<tr>
+				<td>Action:</td>
+				<td><input Name='Action' value="${Actions.action}" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;<input type="hidden" Name='id'
+					value="${Actions.ID}" /></td>
+				<td><input type='reset' /><input name="submit" type='submit' value='Ok' /></td>
+			</tr>
+		</table>
+	</form>
 </body>
+</html>
