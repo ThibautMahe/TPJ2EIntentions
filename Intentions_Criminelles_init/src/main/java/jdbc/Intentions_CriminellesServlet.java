@@ -25,13 +25,11 @@ public class Intentions_CriminellesServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CriminelServices service = new CriminelServices();
-
 		CriminelEntite Criminel = new CriminelEntite(request.getParameter("Name"),Integer.parseInt(request.getParameter("Age")));
 		
 		service.setCriminel(Criminel);
 		
 		request.setAttribute("Criminels", service.getAllCriminels());
-
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/Intentions_CriminellesPost.jsp");
 		rd.forward(request, response);
 	}

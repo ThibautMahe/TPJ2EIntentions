@@ -1,6 +1,7 @@
 package DB.Entite;
 
 public class CriminelEntite {
+	private int ID;
 	private String name;
 	private int age;
 
@@ -8,10 +9,11 @@ public class CriminelEntite {
 		this.name="";
 		this.age=0;
 	}
-
-	public CriminelEntite(int age) {
+	
+	public CriminelEntite(int ID){
+		this.ID=ID;
 		this.name="";
-		this.age=age;
+		this.age=0;
 	}
 
 	public CriminelEntite(String name) {
@@ -22,6 +24,20 @@ public class CriminelEntite {
 	public CriminelEntite(String name, int age) {
 		this.name=name;
 		this.age=age;
+	}
+	
+	public CriminelEntite(int ID, String name, int age) {
+		this.ID=ID;
+		this.name=name;
+		this.age=age;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 
 	public int getAge() {

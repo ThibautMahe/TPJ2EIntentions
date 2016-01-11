@@ -1,26 +1,35 @@
- <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
-<title>Criminelles</title>
+<title>Liste des criminels</title>
 </head>
 <body>
-	<h1>Criminelles</h1>
-	<form method='post'>
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><input Name='Name' /></td>
-			</tr>
-			<tr>
-				<td>Age:</td>
-				<td><input Name='Age' /></td>
-			</tr>
-			<tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td><input type='reset' /><input type='submit' /></td>
-			</tr>
-		</table>
-	</form>
+	<h1>Liste des criminels</h1>
+	<div>
+		<form name="myform" method='post' onsubmit="">
+			<table name="table">
+				<c:forEach var="criminel" items="${Criminels}">
+					<tr>
+						<td>${criminel.name}</td>
+						<td>: ${criminel.age}</td>
+						<td>ans</td>
+						<td>&nbsp;</td>
+						<td><input name="Modifier${criminel.ID}" type="submit"
+							value="Modifier"></td>
+						<td><input name="Supprimer${criminel.ID}" type="submit"
+							value="Supprimer"></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td><input name="Ajouter criminel" type="submit"
+						value="Ajouter criminel"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
-</html>

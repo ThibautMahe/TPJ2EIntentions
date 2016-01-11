@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Intentions Criminelles</title>
+<title>Actions criminelles</title>
 </head>
 <body>
-	<h1>Intentions Criminelles</h1>
+	<h1>Actions criminelles</h1>
 	<form method='post'>
 		<table>
 			<tr>

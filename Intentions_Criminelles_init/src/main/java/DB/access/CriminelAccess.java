@@ -15,10 +15,10 @@ public class CriminelAccess {
 
 	}
 
-	public void setCriminel(CriminelEntite criminel, Connection conn) {
+	public void createCriminel(CriminelEntite criminel, Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
 			try {
-				stmt.executeUpdate("INSERT INTO Criminels(Name,Age) values('" + criminel.getName() + "',"
+				stmt.executeUpdate("INSERT INTO Criminels(Name,Age) VALUES ('" + criminel.getName() + "',"
 						+ criminel.getAge() + ")");
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -27,13 +27,27 @@ public class CriminelAccess {
 			e1.printStackTrace();
 		}
 	}
-	
-	public CriminelEntite getCriminel( Connection conn){
-		CriminelEntite criminel = new CriminelEntite();
-		
+
+	public void setCriminel(CriminelEntite criminel, Connection conn) {
 		try (Statement stmt = conn.createStatement()) {
 			try {
-				stmt.executeQuery("SELECT * FROM Criminels");
+				stmt.executeUpdate("UPDATE Criminels SET Name='" + criminel.getName() + "',Age=" + criminel.getAge()
+						+ " WHERE Criminels.CriminelID=" + criminel.getID() + ")");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public CriminelEntite getCriminel(int criminelID, Connection conn) {
+		CriminelEntite criminel = null;
+
+		try (Statement stmt = conn.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Criminels WHERE CriminelID=" + criminelID + ")")) {
+				criminel = new CriminelEntite(Integer.parseInt(rs.getString("CriminelID")), rs.getString("Name"),
+						Integer.parseInt(rs.getString("Age")));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -43,14 +57,43 @@ public class CriminelAccess {
 		return criminel;
 	}
 
-	public ArrayList<CriminelEntite> selectAllCriminels(Connection conn) throws SQLException {
+	public int getnbCriminel(Connection conn) {
+		int nbcriminel = 0;
+
+		try (Statement stmt = conn.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery("SELECT MAX(CriminelID) as nbCriminel FROM Criminels")) {
+				rs.next();
+				nbcriminel = Integer.parseInt(rs.getString("NBCRIMINEL"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return nbcriminel;
+	}
+
+	public void DeleteCriminel(CriminelEntite criminel, Connection conn) {
+		try (Statement stmt = conn.createStatement()) {
+			try {
+				stmt.executeUpdate("DELETE FROM Criminels where CriminelID=" + criminel.getID());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public ArrayList<CriminelEntite> getAllCriminels(Connection conn) throws SQLException {
 
 		ArrayList<CriminelEntite> list = new ArrayList<CriminelEntite>();
 
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Criminels")) {
 				while (rs.next()) {
-					CriminelEntite temp = new CriminelEntite(rs.getString("Name"),Integer.parseInt(rs.getString("Age")));
+					CriminelEntite temp = new CriminelEntite(Integer.parseInt(rs.getString("CriminelID")),
+							rs.getString("Name"), Integer.parseInt(rs.getString("Age")));
 					list.add(temp);
 				}
 			} catch (SQLException e) {

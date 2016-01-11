@@ -16,7 +16,7 @@ import Services.Action_CriminelleServices;
 public class Actions_CriminellesServlet  extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/Actions_CriminellesGet.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/Actions_CriminellesGet.jsp");
 		rd.forward(request, response);
 	}
 
@@ -30,7 +30,7 @@ public class Actions_CriminellesServlet  extends HttpServlet {
 
 		request.setAttribute("Action", service.getAllActions_Criminelles());
 
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/Actions_CriminellesPost.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/Actions_CriminellesPost.jsp");
 		rd.forward(request, response);
 	}
 }

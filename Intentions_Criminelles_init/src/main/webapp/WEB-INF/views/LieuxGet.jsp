@@ -1,21 +1,27 @@
- <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
-<title>Lieu criminels</title>
+<title>Liste des lieux</title>
 </head>
 <body>
-	<h1>Lieu criminels</h1>
-	<form method='post'>
+	<h1>Liste des lieux</h1>
+	<div>
 		<table>
-			<tr>
-				<td>Lieu:</td>
-				<td><input Name='Lieu' /></td>
-			</tr>
+			<c:forEach var="lieu" items="${Lieux}">
+				<tr>
+					<td>${lieu.name}</td>
+					<td>: ${lieu.age}</td>
+					<td>ans</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><input type="button" value="Modifier"></td>
+					<td><input type="button" value="Supprimer"></td>
+				</tr>
+			</c:forEach>
 			<tr>
 				<td>&nbsp;</td>
-				<td><input type='reset' /><input type='submit' /></td>
+				<td><input type="button" value="Ajouter lieu"></td>
 			</tr>
 		</table>
-	</form>
+	</div>
 </body>
-</html>

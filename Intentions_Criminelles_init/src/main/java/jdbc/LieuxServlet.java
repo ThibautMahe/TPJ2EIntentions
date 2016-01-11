@@ -17,7 +17,7 @@ import Services.LieuServices;
 public class LieuxServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/LieuxGet.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/LieuxGet.jsp");
 		rd.forward(request, response);
 	}
 
@@ -31,7 +31,7 @@ public class LieuxServlet extends HttpServlet {
 
 		request.setAttribute("Lieu", service.getAllLieux());
 
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/Lieux.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/LieuxPost.jsp");
 		rd.forward(request, response);
 	}
 }
