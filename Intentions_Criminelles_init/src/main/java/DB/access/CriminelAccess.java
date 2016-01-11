@@ -27,6 +27,18 @@ public class CriminelAccess {
 			e1.printStackTrace();
 		}
 	}
+	
+	public void getCriminel(CriminelEntite Criminel, Connection conn){
+		try (Statement stmt = conn.createStatement()) {
+			try {
+				stmt.executeQuery("SELECT * FROM Criminels");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 
 	public ArrayList<CriminelEntite> selectAllCriminels(Connection conn) throws SQLException {
 
