@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 import DB.access.Constants;
 import DB.access.Intention_CriminelleAccess;
+import DB.Entite.Action_CriminelleEntite;
 import DB.Entite.Intention_CriminelleEntite;
+import DB.Entite.LieuEntite;
 
 public class Intention_CriminelleServices {
 	private Intention_CriminelleAccess intention_CriminelleAccess;
@@ -16,20 +18,30 @@ public class Intention_CriminelleServices {
 		this.intention_CriminelleAccess = new Intention_CriminelleAccess();
 	}
 
-	public void createIntention_Criminelle(Intention_CriminelleEntite intention_Criminelle) {
+	public boolean createIntention_Criminelle(Intention_CriminelleEntite intention_Criminelle) {
+		boolean IsCreated = false;
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
-			intention_CriminelleAccess.createIntention_Criminelle(intention_Criminelle, conn);
+			if (UneActionDansUnLieu(intention_Criminelle.getAction_Criminelle(), intention_Criminelle.getLieu())) {
+				intention_CriminelleAccess.createIntention_Criminelle(intention_Criminelle, conn);
+				IsCreated = true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return IsCreated;
 	}
 
-	public void setIntention_Criminelle(Intention_CriminelleEntite intention_Criminelle) {
+	public boolean setIntention_Criminelle(Intention_CriminelleEntite intention_Criminelle) {
+		boolean IsSettled = false;
 		try (Connection conn = DriverManager.getConnection(Constants.URL, Constants.USERNAME, Constants.PASSWORD)) {
-			intention_CriminelleAccess.setIntention_Criminelle(intention_Criminelle, conn);
+			if (UneActionDansUnLieu(intention_Criminelle.getAction_Criminelle(), intention_Criminelle.getLieu())) {
+				intention_CriminelleAccess.setIntention_Criminelle(intention_Criminelle, conn);
+				IsSettled = true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return IsSettled;
 	}
 
 	public Intention_CriminelleEntite getIntention_Criminelle(int intention_CriminelleID) {
@@ -74,5 +86,12 @@ public class Intention_CriminelleServices {
 		}
 
 		return allIntentions;
+	}
+
+	private boolean UneActionDansUnLieu(Action_CriminelleEntite action_Criminelle, LieuEntite lieu) {
+		boolean ZoneEtLieuEgale = false;
+		if (action_Criminelle.getLieuID() == 0 || action_Criminelle.getLieuID() == lieu.getID())
+			ZoneEtLieuEgale = true;
+		return ZoneEtLieuEgale;
 	}
 }

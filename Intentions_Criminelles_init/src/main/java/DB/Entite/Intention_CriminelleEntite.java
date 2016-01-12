@@ -2,9 +2,9 @@ package DB.Entite;
 
 public class Intention_CriminelleEntite {
 	private int ID;
-	private Action_CriminelleEntite Action_Criminelle;
-	private CriminelEntite Criminel;
-	private LieuEntite Lieu;
+	private Action_CriminelleEntite action_Criminelle;
+	private CriminelEntite criminel;
+	private LieuEntite lieu;
 
 	public Intention_CriminelleEntite(int ID) {
 		this.ID = ID;
@@ -13,9 +13,9 @@ public class Intention_CriminelleEntite {
 	public Intention_CriminelleEntite(int ID, Action_CriminelleEntite action_Criminelle, CriminelEntite criminel,
 			LieuEntite lieu) {
 		this.ID = ID;
-		this.Criminel=criminel;
-		this.Action_Criminelle = action_Criminelle;
-		this.Lieu=lieu;
+		this.criminel=criminel;
+		this.action_Criminelle = action_Criminelle;
+		this.lieu=lieu;
 	}
 
 	public Intention_CriminelleEntite() {
@@ -23,11 +23,11 @@ public class Intention_CriminelleEntite {
 	}
 
 	public int getAction_CriminelleID() {
-		return Action_Criminelle.getID();
+		return action_Criminelle.getID();
 	}
 
 	public void setAction_Criminelle(Action_CriminelleEntite action_Criminelle) {
-		this.Action_Criminelle = action_Criminelle;
+		this.action_Criminelle = action_Criminelle;
 	}
 
 	public int getID() {
@@ -39,30 +39,30 @@ public class Intention_CriminelleEntite {
 	}
 
 	public int getCriminelID() {
-		return Criminel.getID();
+		return criminel.getID();
 	}
 
 	public void setCriminel(CriminelEntite criminel) {
-		this.Criminel = criminel;
+		this.criminel = criminel;
 	}
 
 	public int getLieuID() {
-		return Lieu.getID();
+		return lieu.getID();
 	}
 
 	public Action_CriminelleEntite getAction_Criminelle() {
-		return Action_Criminelle;
+		return action_Criminelle;
 	}
 
 	public CriminelEntite getCriminel() {
-		return Criminel;
+		return criminel;
 	}
 
 	public LieuEntite getLieu() {
-		return Lieu;
+		return lieu;
 	}
 
 	public void setLieu(LieuEntite lieu) {
-		this.Lieu = lieu;
+		this.lieu = lieu;
 	}
 }

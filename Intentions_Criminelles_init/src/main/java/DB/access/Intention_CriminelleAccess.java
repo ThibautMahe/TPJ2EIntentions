@@ -55,10 +55,10 @@ public class Intention_CriminelleAccess {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Intentions WHERE IntionID=" + Intenton_CriminelleID)) {
 				rs.next();
 				intention_Criminelle = new Intention_CriminelleEntite(Integer.parseInt(rs.getString("IntentionID")),
-						action_criminelleService.getAction_Criminelle(
-								Integer.parseInt(rs.getString("Action_CriminelleID"))),
-								criminelService.getCriminel(Integer.parseInt(rs.getString("CriminelID"))),
-								lieuService.getLieu(Integer.parseInt(rs.getString("LieuID"))));
+						action_criminelleService
+								.getAction_Criminelle(Integer.parseInt(rs.getString("Action_CriminelleID"))),
+						criminelService.getCriminel(Integer.parseInt(rs.getString("CriminelID"))),
+						lieuService.getLieu(Integer.parseInt(rs.getString("LieuID"))));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -98,16 +98,22 @@ public class Intention_CriminelleAccess {
 	}
 
 	public ArrayList<Intention_CriminelleEntite> getAllIntentions_Criminelles(Connection conn) throws SQLException {
-
+		CriminelServices criminelService = new CriminelServices();
+		LieuServices lieuService = new LieuServices();
+		Action_CriminelleServices action_criminelleService = new Action_CriminelleServices();
 		ArrayList<Intention_CriminelleEntite> list = new ArrayList<Intention_CriminelleEntite>();
 
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM Intentions")) {
 				while (rs.next()) {
-					Intention_CriminelleEntite temp = new Intention_CriminelleEntite();
+					Intention_CriminelleEntite temp = new Intention_CriminelleEntite(
+							Integer.parseInt(rs.getString("IntentionID")),
+							action_criminelleService
+									.getAction_Criminelle(Integer.parseInt(rs.getString("Action_CriminelleID"))),
+							criminelService.getCriminel(Integer.parseInt(rs.getString("CriminelID"))),
+							lieuService.getLieu(Integer.parseInt(rs.getString("LieuID"))));
 					list.add(temp);
 				}
-
 			}
 		}
 		return list;

@@ -15,7 +15,7 @@ public class Populator {
 						"CREATE TABLE Intentions(IntentionID BIGINT PRIMARY KEY AUTO_INCREMENT, CriminelID BIGINT, LieuID BIGINT, Action_CriminelleID BIGINT)");
 				stm.execute("DROP TABLE IF EXISTS Actions_criminelles");
 				stm.execute(
-						"CREATE TABLE Actions_criminelles(Action_CriminelleID BIGINT PRIMARY KEY AUTO_INCREMENT, Action_criminelle VARCHAR(255)) ");
+						"CREATE TABLE Actions_criminelles(Action_CriminelleID BIGINT PRIMARY KEY AUTO_INCREMENT, Action_criminelle VARCHAR(255), LieuID BIGINT) ");
 				stm.execute("DROP TABLE IF EXISTS Criminels");
 				stm.execute(
 						"CREATE TABLE Criminels(CriminelID BIGINT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(255), Age BIGINT) ");
@@ -33,8 +33,10 @@ public class Populator {
 			try (Statement stm = conn.createStatement()) {
 				stm.executeUpdate("INSERT INTO CRIMINELS(Name,Age) VALUES('Jean',6)");
 				stm.executeUpdate("INSERT INTO Criminels(Name,Age) VALUES('Jacque',58)");
-				stm.executeUpdate("INSERT INTO Actions_criminelles(action_criminelle) VALUES('Ne pas faire la vaisselle')");
+				stm.executeUpdate(
+						"INSERT INTO Actions_criminelles(action_criminelle) VALUES('Ne pas faire la vaisselle',1)");
 				stm.executeUpdate("INSERT INTO Lieux(Name) VALUES('Cuisine')");
+				stm.executeUpdate("INSERT INTO Intentions(CriminelID,LieuID,Action_criminelleID) VALUES(1,1,1)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
